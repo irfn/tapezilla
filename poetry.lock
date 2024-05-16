@@ -65,6 +65,23 @@ files = [
 requests = ">=2.0"
 
 [[package]]
+name = "betamax-serializers"
+version = "0.2.1"
+description = "A set of third-party serializers for Betamax"
+optional = false
+python-versions = "*"
+files = [
+    {file = "betamax-serializers-0.2.1.tar.gz", hash = "sha256:345c419b1b73171f2951c62ac3c701775ac4b76e13e86464ebf0ff2a978e4949"},
+    {file = "betamax_serializers-0.2.1-py2.py3-none-any.whl", hash = "sha256:1b23c46429c40a8873682854c88d805c787c72d252f3fa0c858e9c300682ceac"},
+]
+
+[package.dependencies]
+betamax = ">=0.3.2"
+
+[package.extras]
+yaml11 = ["PyYAML"]
+
+[[package]]
 name = "certifi"
 version = "2024.2.2"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -1547,4 +1564,4 @@ dev = ["black (>=19.3b0)", "pytest (>=4.6.2)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "150dd62caa1d29e7145d2d81e8cb1e8686aca797f2f56e02f8e915ec889b1714"
+content-hash = "f86d55e21ec2b872400d99de759a4568cc3721648342e5cca2e54d591b71a000"

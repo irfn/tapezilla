@@ -4,6 +4,7 @@ from requests import Session
 from loguru import logger
 from pydantic import BaseModel, Field
 from typing import Annotated
+from betamax_serializers import pretty_json
 import json
 
 import ulid
@@ -16,8 +17,11 @@ class RecordingResuest(BaseModel):
     url: str
 
 app = FastAPI()
+
+Betamax.register_serializer(pretty_json.PrettyJSONSerializer)
 with Betamax.configure() as config:
     config.cassette_library_dir = 'cassettes'
+    config.default_cassette_options['serialize_with'] = 'prettyjson'
 
 @app.get("/recordings")
 def get_recordings():
@@ -42,7 +46,7 @@ def record_get(r_id: str):
     logger.debug(f"Recording info: {recording_info}")
     logger.debug(f"Recording info: {recording_info['name'][0]}")
     with Betamax(Session()) as vcr:
-        vcr.use_cassette(recording_info['name'][0])
+        vcr.use_cassette(recording_info['name'][0], record='new_episodes')
         response = vcr.session.get(recording_info['url'][0])
         return response.json()
 
@@ -52,6 +56,6 @@ def record_put(r_id: str, body: dict):
     logger.debug(f"Recording info: {recording_info['name'][0]}")
     
     with Betamax(Session()) as vcr:
-        vcr.use_cassette(recording_info['name'][0])
+        vcr.use_cassette(recording_info['name'][0], record='new_episodes')
         response = vcr.session.post(recording_info['url'][0], json=body.to_json(), headers={"Content-Type": "application/json"})
         return response.json()
