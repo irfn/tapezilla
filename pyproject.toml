@@ -9,6 +9,13 @@ readme = "README.md"
 python = "^3.12"
 fastapi = "^0.111.0"
 betamax = "^0.9.0"
+loguru = "^0.7.2"
+duckdb = "^0.10.2"
+ulid = "^1.1"
+arrow = "^1.3.0"
+pyarrow = "^16.1.0"
+numpy = "^1.26.4"
+pandas = "^2.2.2"
 
 
 [build-system]
