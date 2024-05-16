@@ -43,7 +43,6 @@ def create_record_request(recording_resuest: RecordingResuest):
 @app.get("/record/{r_id}")
 def record_get(r_id: str):
     recording_info = duckdb.sql(f"SELECT name, method, url from read_ndjson('./recordings.json') where id = '{r_id}';").df().to_dict()
-    logger.debug(f"Recording info: {recording_info}")
     logger.debug(f"Recording info: {recording_info['name'][0]}")
     with Betamax(Session()) as vcr:
         vcr.use_cassette(recording_info['name'][0], record='new_episodes')
